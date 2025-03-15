@@ -32,6 +32,10 @@ app.use('/clientes', clientesRoutes)
 const vehiculosRoutes = require('./route/vehiculo');
 app.use('/vehiculo',vehiculosRoutes)
 
+// Ruta para recordatorio
+const recordatorioRoutes = require('./route/recordatorio');
+app.use('/recordatorio', recordatorioRoutes)
+
 app.listen(port, () =>{
     console.log(`API CRM corriendo en http://localhost:${port}`)
 })
