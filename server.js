@@ -27,6 +27,11 @@ const clientesRoutes = require ('./route/clientes');
 app.use('/clientes', clientesRoutes)
 
 // iniciar el servidor 
+
+// ruta para vehiculos 
+const vehiculosRoutes = require('./route/vehiculo');
+app.use('/vehiculo',vehiculosRoutes)
+
 app.listen(port, () =>{
     console.log(`API CRM corriendo en http://localhost:${port}`)
 })

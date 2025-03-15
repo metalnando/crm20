@@ -31,9 +31,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.execute("SELECT * FROM cliente WHERE id_cliente = ?", [
-      id,
-    ]);
+    const [rows] = await pool.execute("SELECT * FROM cliente WHERE id_cliente = ?", [id]);
     if (rows.length > 0) {
       res.json(rows[0]);
     } else {
