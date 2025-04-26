@@ -61,13 +61,17 @@ router.get("/:id", async (req,res)=>{
 });
 
 //Actualizar el recordatorio
-router.put("/:id", async (req,res)=>{
+router.put('/:id', async (req,res)=>{
+  
+
     try{
+      // console.log("ID recibido:", id, "Tipo:", typeof id);
+      
         const {id}= req.params;
         const {id_vehiculo, tipo_recordatorio,fecha_vencimiento,estado}=req.body;
-        const [resul] = await pool.execute("UPDATE recordatorio SET id_vehiculo=?, tipo_recordatorio=?, fecha_vencimiento=?, estado=?",[id_vehiculo,tipo_recordatorio,fecha_vencimiento,estado]);
+        const [resul] = await pool.execute("UPDATE recordatorio SET id_vehiculo=?, tipo_recordatorio=?, fecha_vencimiento=?, estado=? WHERE id_recordatorio=?",[id_vehiculo,tipo_recordatorio,fecha_vencimiento,estado, id]);
 
-        if(resul.affectedRows >0){
+        if(resul.affectedRows > 0){
             res.json({message:"recordatorio actualizado con exito"});
         }else{
             res.status(404).json({message:"recordatorio no encontrado"});

@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .addEventListener("submit", async (e) => {
       e.preventDefault();
       const id_vehiculo = document.getElementById("id_vehiculo-input");
+      
       const tipo_recordatorio = document.getElementById(
         "tipo_recordatorio-input");
       const fecha_vencimiento = document.getElementById(
@@ -41,6 +42,8 @@ async function obtenerRecordatorios() {
       const row = document.createElement("tr");
 
       row.innerHTML = `
+      <td> <input type ="text" value="${recordatorio.id_recordatorio}" readonly>
+                </td>
                 <td> <input type ="text" value="${recordatorio.id_vehiculo}">
                 </td>
                 <td> <input type ="text" value="${recordatorio.tipo_recordatorio}">
@@ -58,10 +61,11 @@ async function obtenerRecordatorios() {
       const btnEliminar = row.querySelector('.btn-eliminar');
       const btnGuardar = row.querySelector('.btn-guardar');
 
-      const inputIdVehiculo = row.querySelector("td:nth-child(1) input");
-      const inputTipoRecordatorio = row.querySelector("td:nth-child(2) input");
-      const inputFechaVencimiento = row.querySelector("td:nth-child(3) input");
-      const inputEstado = row.querySelector("td:nth-child(4) input");
+      const inputIdRecordatorio = row.querySelector("td:nth-child(1)")
+      const inputIdVehiculo = row.querySelector("td:nth-child(2) input");
+      const inputTipoRecordatorio = row.querySelector("td:nth-child(3) input");
+      const inputFechaVencimiento = row.querySelector("td:nth-child(4) input");
+      const inputEstado = row.querySelector("td:nth-child(5) input");
      
       if( btnGuardar && inputIdVehiculo && inputTipoRecordatorio && inputFechaVencimiento && inputEstado)
         {
@@ -71,9 +75,10 @@ async function obtenerRecordatorios() {
             inputIdVehiculo.value,
             inputTipoRecordatorio.value,
             inputFechaVencimiento.value,
-            inputEstado.value
+            inputEstado.value,
              );
              obtenerRecordatorios();
+             return;
            };        
         }
 
@@ -84,6 +89,7 @@ async function obtenerRecordatorios() {
       
       row.appendChild(btnEliminar);
       listaRecordatorio.appendChild(row);
+
     });
    
   } catch (error) {
@@ -109,15 +115,25 @@ async function agregarRecordatorio(id_vehiculo, tipo_recordatorio,
   }
 }
 
-async function actualizarRecordatorio(id,id_vehiculo,tipo_recordatorio,fecha_vencimiento,estado)
+async function actualizarRecordatorio(id,id_vehiculo, tipo_recordatorio,fecha_vencimiento,estado)
  {
+
   try {
-    const fechaFormat = new Date(fecha_vencimiento).toISOString(); 
+    const fechaFormat = new Date(fecha_vencimiento).toISOString();
+    console.log("Datos a actualizar:", {
+      id,
+      id_vehiculo,
+      tipo_recordatorio,
+      fecha_vencimiento: fechaFormat,
+      estado
+    });  
+     
     const response = await fetch(`${API_URL_RECORDATORIO}/${id}`, 
     {
       method: "PUT",
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({id_vehiculo,tipo_recordatorio,        fecha_vencimiento:fechaFormat, estado}),
+      body: JSON.stringify({id_vehiculo, tipo_recordatorio,
+        fecha_vencimiento:fechaFormat,estado}),
     });
     if (!response.ok) {
       throw new Error(`HTTP error! status:${response.status}`);
