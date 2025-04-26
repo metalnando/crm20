@@ -1,0 +1,7 @@
+npm create vite@latest --frontend --template vanilla
+
+select vanilla
+select javascript
+cd frontend
+npm install
+npm run dev

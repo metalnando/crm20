@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recordatorios</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <link rel="stylesheet" href="src/style.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script type="module" src="src/recordatorios.js"></script>
+</head>
+<body>
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">Gestión de Recordatorios</span>
+      </div>
+    </header>
+    <div class="mdl-layout__drawer">
+      <span class="mdl-layout-title">Menú</span>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" href="index.html">Inicio</a>
+        <a class="mdl-navigation__link" href="clientes.html">Clientes</a>
+        <a class="mdl-navigation__link" href="vehiculos.html">Vehículos</a>
+        <a class="mdl-navigation__link" href="recordatorio.html">Recordatorios</a>
+      </nav>
+    </div>
+    <main class="mdl-layout__content">
+      <div class="page-content">
+        <h1>Recordatorios</h1>
+        
+        <div class="form-container">
+          <form id="recordatorio-form">
+            
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="id_vehiculo-input" required />
+              <label class="mdl-textfield__label" for="id_vehiculo-input">Id_vehiculo:</label>   
+            </div>
+            
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="text" id="tipo_recordatorio-input" required />
+              <label class="mdl-textfield__label" for="tipo_recordatorio-input">Tipo_Recordatorio(SOAT-TECNICO MECANO):</label>   
+            </div>
+            
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+              <input class="mdl-textfield__input" type="date" id="fecha_vencimiento-input" required />
+              <label class="mdl-textfield__label" for="fecha_vencimiento-input">Fecha_Vencimiento:</label>   
+            </div>
+
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                <input class="mdl-textfield__input" type="text" id="estado-input" required />
+                <label class="mdl-textfield__label" for="estado-input">Estado (ENVIADO-PENDIENTE-CONFIRMADO):</label>   
+              </div>
+            
+            <div>
+              <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Agregar</button>
+            </div>
+          </form>
+        </div>
+        
+        <div class="table-container">
+          <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+            <thead>
+              <tr>
+                
+                <td>Id_Vehiculo</td>
+                <td>Tipo_Recordatorio</td>
+                <td>Fecha_Vencimiento</td>
+                <td>Estado</td>
+                <td>Acciones</td>
+              </tr>
+            </thead>
+            <tbody id="recordatorios-list"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

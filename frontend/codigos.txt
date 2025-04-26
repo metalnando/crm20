@@ -1,0 +1,25 @@
+//Obtener Clientes 
+async function obtenerClientes() {
+  const listaCliente= document.getElementById("clientes-list");
+  listaCliente.innerHTML='';
+  try {
+    const response = await fetch(`${API_URL}`);
+    const clientes = await response.json();
+    clientes.forEach((cliente) => {
+              const item = document.createElement('li');
+              item.textContent = cliente.nombre+cliente.email+" "+cliente.telefono;
+              // Body
+              const btnEliminar = document.createElement("Button");
+              btnEliminar.textContent = "🚮";
+              btnEliminar.onclick = async()=>{
+                await eliminarCliente(cliente.id_cliente);
+                obtenerClientes();
+              }
+              item.appendChild(btnEliminar);
+              listaCliente.appendChild(item);
+
+    });
+  } catch (error) {
+    console.error("Error", error);
+  }
+}
